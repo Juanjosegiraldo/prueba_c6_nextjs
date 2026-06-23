@@ -46,6 +46,7 @@ Create a `.env.local` file based on `.env.example`:
 | `PEXELS_API_KEY` | Pexels key for the seed images. If not set, placehold.co images are used. |
 | `MAIL_USER` | Gmail account that sends the welcome email. |
 | `MAIL_PASS` | Google App Password (16 characters, requires 2-step verification). |
+| `SEED_SECRET` | Secret key required (via the `x-seed-secret` header) to run `POST /api/seed`. The endpoint is locked if it is not set. |
 
 ## Commands
 

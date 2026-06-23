@@ -161,8 +161,20 @@ const sampleRecipes: Omit<IRecipe, "image" | "createdAt" | "updatedAt">[] = [
 ];
 
 // POST /api/seed — reset the catalog and auto-assign an image per recipe.
-export async function POST() {
+// Destructive (wipes the collection), so it is gated behind a secret key:
+// the request must send `x-seed-secret` matching the SEED_SECRET env var.
+export async function POST(request: Request) {
   try {
+    const secret = process.env.SEED_SECRET;
+
+    // Fail closed: if no secret is configured, the endpoint stays locked.
+    if (!secret || request.headers.get("x-seed-secret") !== secret) {
+      return Response.json(
+        { data: null, code: 401, message: "Unauthorized" },
+        { status: 401 }
+      );
+    }
+
     await connectDB();
     await Recipe.deleteMany({});
 
