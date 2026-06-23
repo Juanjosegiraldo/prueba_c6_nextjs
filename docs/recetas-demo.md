@@ -1,29 +1,29 @@
-# Plantillas de recetas para la demo
+# Recipe templates for the demo
 
-Recetas listas para crear rápido durante la presentación. Créalas **una a una**
-(no repitas la misma llamada): las recetas **no** tienen restricción de unicidad
-en el nombre, así que enviar la misma dos veces crea dos documentos.
+Ready-to-use recipes to create quickly during the presentation. Create them
+**one at a time** (do not repeat the same call): recipes have **no** uniqueness
+constraint on the name, so sending the same one twice creates two documents.
 
-## Imágenes
+## Images
 
-El campo `image` usa una URL de `placehold.co` (un recuadro gris) que **siempre
-funciona**. Para una foto real, reemplázala por una URL de Pexels:
+The `image` field uses a `placehold.co` URL (a gray box) that **always works**.
+For a real photo, replace it with a Pexels URL:
 
-1. Entra a [pexels.com](https://pexels.com) y busca el plato.
-2. Clic derecho en la foto → **"Copiar dirección de la imagen"**.
-3. Asegúrate de que empiece con **`images.pexels.com`** (el único host real
-   permitido en `next.config.ts`; cualquier otro host fallaría con `next/image`).
-4. Pega esa URL en el campo `image`.
+1. Go to [pexels.com](https://pexels.com) and search for the dish.
+2. Right-click the photo → **"Copy image address"**.
+3. Make sure it starts with **`images.pexels.com`** (the only real host allowed
+   in `next.config.ts`; any other host would fail with `next/image`).
+4. Paste that URL into the `image` field.
 
-> Nota: el campo `difficulty` debe mantener los valores `easy`, `medium` o `hard`
-> (la app los muestra como "Fácil", "Media" y "Difícil"). No los traduzcas.
+> Note: the `difficulty` field must keep the values `easy`, `medium` or `hard`
+> (the app renders them as "Fácil", "Media" and "Difícil"). Do not translate them.
 
 ---
 
-## Opción 1 — Consola del navegador (lo más rápido)
+## Option 1 — Browser console (fastest)
 
-Abre el sitio desplegado, presiona **F12** → pestaña **Console**, y pega cada
-bloque (uno a la vez):
+Open the deployed site, press **F12** → **Console** tab, and paste each block
+(one at a time):
 
 ```js
 // 1. Arepa de Huevo
@@ -77,15 +77,15 @@ await fetch("/api/recipes", { method: "POST", headers: { "Content-Type": "applic
 }).then(r => r.json()).then(console.log);
 ```
 
-Respuesta esperada para cada una: `{ data: {...}, code: 201, message: "Recipe created" }`.
+Expected response for each: `{ data: {...}, code: 201, message: "Recipe created" }`.
 
 ---
 
-## Opción 2 — Postman
+## Option 2 — Postman
 
-1. Crea una petición **POST** a `https://prueba-c6-nextjs.vercel.app/api/recipes`.
-2. En **Headers**: `Content-Type` = `application/json`.
-3. En **Body** → **raw** → **JSON**, pega solo el objeto (sin el `fetch`):
+1. Create a **POST** request to `https://prueba-c6-nextjs.vercel.app/api/recipes`.
+2. In **Headers**: `Content-Type` = `application/json`.
+3. In **Body** → **raw** → **JSON**, paste only the object (without the `fetch`):
 
 ```json
 {
@@ -135,12 +135,11 @@ Respuesta esperada para cada una: `{ data: {...}, code: 201, message: "Recipe cr
 }
 ```
 
-4. **Send**. Repite, cambiando el body por cada receta.
+4. **Send**. Repeat, swapping the body for each recipe.
 
 ---
 
-## Recomendación
+## Recommendation
 
-Para la demo, la **Opción 1 (consola del navegador)** es la más simple: no hay
-nada que instalar y usa rutas relativas, así que funciona igual en local y en
-producción.
+For the demo, **Option 1 (browser console)** is the simplest: nothing to install
+and it uses relative paths, so it works the same locally and in production.
