@@ -1,8 +1,5 @@
 import type { IRecipe } from "@/database/models/Recipe";
 
-// Base URL so the service also works from Server Components (absolute fetch).
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
-
 // Unified API envelope used across the app.
 interface ApiResponse<T> {
   data: T;
@@ -42,7 +39,7 @@ export type RecipeInput = {
 // Fetch a single page of recipes (default 12 per page) instead of the whole DB.
 export async function getRecipes(page = 1, limit = 12): Promise<RecipePage> {
   const res = await fetch(
-    `${BASE_URL}/api/recipes?page=${page}&limit=${limit}`,
+    `/api/recipes?page=${page}&limit=${limit}`,
     { cache: "no-store" }
   );
   const json: PaginatedResponse<Recipe[]> = await res.json();
@@ -50,14 +47,14 @@ export async function getRecipes(page = 1, limit = 12): Promise<RecipePage> {
 }
 
 export async function getRecipeById(id: string): Promise<Recipe | null> {
-  const res = await fetch(`${BASE_URL}/api/recipes/${id}`, { cache: "no-store" });
+  const res = await fetch(`/api/recipes/${id}`, { cache: "no-store" });
   if (res.status === 404) return null;
   const json: ApiResponse<Recipe> = await res.json();
   return json.data;
 }
 
 export async function createRecipe(input: RecipeInput): Promise<Recipe> {
-  const res = await fetch(`${BASE_URL}/api/recipes`, {
+  const res = await fetch(`/api/recipes`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(input),
@@ -70,7 +67,7 @@ export async function updateRecipe(
   id: string,
   input: Partial<RecipeInput>
 ): Promise<Recipe | null> {
-  const res = await fetch(`${BASE_URL}/api/recipes/${id}`, {
+  const res = await fetch(`/api/recipes/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(input),
@@ -81,6 +78,6 @@ export async function updateRecipe(
 }
 
 export async function deleteRecipe(id: string): Promise<boolean> {
-  const res = await fetch(`${BASE_URL}/api/recipes/${id}`, { method: "DELETE" });
+  const res = await fetch(`/api/recipes/${id}`, { method: "DELETE" });
   return res.ok;
 }

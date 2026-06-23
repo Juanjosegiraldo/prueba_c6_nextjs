@@ -72,7 +72,11 @@ export async function sendWelcomeEmail(nombre: string, email: string): Promise<v
   const transporter = getTransporter();
   if (!transporter) return; // no credentials: skip silently (already warned)
 
-  const appUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
+  // The email link must be absolute. Prefer the configured public URL; on
+  // Vercel fall back to the auto-injected deployment URL; localhost in dev.
+  const appUrl =
+    process.env.NEXT_PUBLIC_BASE_URL ??
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
   await transporter.sendMail({
     from: `"RecetasApp" <${process.env.MAIL_USER}>`,

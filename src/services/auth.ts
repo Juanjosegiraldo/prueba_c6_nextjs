@@ -1,5 +1,3 @@
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000";
-
 interface ApiResponse<T> {
   data: T;
   code: number;
@@ -18,7 +16,7 @@ export async function registerUser(
   email: string,
   password: string
 ): Promise<ApiResponse<SessionUser | null>> {
-  const res = await fetch(`${BASE_URL}/api/auth/register`, {
+  const res = await fetch(`/api/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, password }),
@@ -30,7 +28,7 @@ export async function loginUser(
   email: string,
   password: string
 ): Promise<ApiResponse<SessionUser | null>> {
-  const res = await fetch(`${BASE_URL}/api/auth/login`, {
+  const res = await fetch(`/api/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
