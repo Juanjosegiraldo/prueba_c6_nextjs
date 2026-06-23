@@ -4,6 +4,10 @@ Recipe catalog application built with **Next.js 16 (App Router)**, **TypeScript*
 
 It lets you browse a recipe catalog, view the detail of each recipe, register and log in, and save recipes as favorites (protected by session). A welcome email is sent on registration.
 
+## Live demo
+
+The app is deployed on Vercel: **[https://prueba-c6-nextjs.vercel.app/](https://prueba-c6-nextjs.vercel.app/)**
+
 ## Features
 
 - Recipe catalog on the home page (visible without logging in).
@@ -51,6 +55,17 @@ Create a `.env.local` file based on `.env.example`:
 | `npm run build` | Build the production version. |
 | `npm run start` | Start the production version. |
 | `npm run lint` | Run the linter. |
+
+## Deployment
+
+The app is deployed on Vercel at **[https://prueba-c6-nextjs.vercel.app/](https://prueba-c6-nextjs.vercel.app/)**.
+
+To deploy your own instance:
+
+1. Push the repository to GitHub and import it in Vercel (it auto-detects Next.js).
+2. In **Settings → Environment Variables**, add `MONGODB_URI`, `MAIL_USER`, `MAIL_PASS` and `PEXELS_API_KEY`.
+3. In **MongoDB Atlas → Network Access**, allow access from any IP (`0.0.0.0/0`), since Vercel uses dynamic IPs.
+4. Deploy, then send a `POST` to `/api/seed` once to populate the catalog.
 
 ## Author
 
